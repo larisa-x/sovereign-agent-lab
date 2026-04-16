@@ -7,30 +7,37 @@ Fill this in after running exercise4_mcp_client.py.
 # ── Basic results ──────────────────────────────────────────────────────────
 
 # Tool names as shown in "Discovered N tools" output.
-TOOLS_DISCOVERED = []
+TOOLS_DISCOVERED = ["search_venues", "get_venue_details"]
 
-QUERY_1_VENUE_NAME    = "FILL_ME_IN"
-QUERY_1_VENUE_ADDRESS = "FILL_ME_IN"
-QUERY_2_FINAL_ANSWER  = "FILL_ME_IN"
+QUERY_1_VENUE_NAME    = "The Haymarket Vaults"
+QUERY_1_VENUE_ADDRESS = "1 Dalry Road, Edinburgh"
+QUERY_2_FINAL_ANSWER  = "No venue in the known list can accommodate 300 guests with vegan options. The largest vegan-friendly venue is The Albanach at 180 capacity, which is still well below the 300 requirement."
 
 # ── The experiment ─────────────────────────────────────────────────────────
 # Required: modify venue_server.py, rerun, revert.
 
-EX4_EXPERIMENT_DONE = None   # True or False
+EX4_EXPERIMENT_DONE = True   # True or False
 
 # What changed, and which files did or didn't need updating? Min 30 words.
 EX4_EXPERIMENT_RESULT = """
-FILL ME IN
+I changed The Albanach's status to full in mcp_venue_server.py and ran the script again. In Query 1, the search now returned only one venue (The
+Haymarket Vaults) instead of two. The Albanach just disappeared from the results. The interesting part is that I didn't touch the agent code or the
+exercise script at all - only the data file behind the MCP server. The agent automatically got different results because it asks the server each time it
+runs. This showed me how MCP keeps the data separate from the agent logic.
 """
 
 # ── MCP vs hardcoded ───────────────────────────────────────────────────────
 
-LINES_OF_TOOL_CODE_EX2 = 0   # count in exercise2_langgraph.py
-LINES_OF_TOOL_CODE_EX4 = 0   # count in exercise4_mcp_client.py
+LINES_OF_TOOL_CODE_EX2 = 120   # count in exercise2_langgraph.py
+LINES_OF_TOOL_CODE_EX4 = 25   # count in exercise4_mcp_client.py
 
 # What does MCP buy you beyond "the tools are in a separate file"? Min 30 words.
 MCP_VALUE_PROPOSITION = """
-FILL ME IN
+I think the biggest thing MCP gives you is that tools are discovered at runtime — the agent asks the server what tools are available instead of
+having them hardcoded. So you can add or remove tools without changing agent code. Also multiple agents can connect to the same server, which means the
+LangGraph research agent and the Rasa confirmation agent can both use the same venue data without copy-pasting code. And when data changes (like a
+venue becoming full) every connected agent sees it immediately. That seems really important for the PyNanoClaw hybrid system where two different agents
+need to share the same information.
 """
 
 # ── PyNanoClaw architecture — SPECULATION QUESTION ─────────────────────────
